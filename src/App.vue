@@ -1,32 +1,40 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <Navbar />
+    <div id="main-content" class="container">
+      <router-view />
     </div>
-    <router-view />
+    <Footer />
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import "../node_modules/materialize-css/dist/css/materialize.min.css";
+import "../node_modules/materialize-css/dist/js/materialize.min.js";
+
+export default {
+  name: "App",
+  components: { Navbar, Footer }
+};
+</script>
+
+<style scoped>
+div#app {
+  position: relative;
+  min-height: 100vh;
 }
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+div#main-content {
+  padding-bottom: 17rem;
+}
+@media only screen and (min-width: 770px) {
+  div#main-content {
+    padding-bottom: 24rem;
   }
 }
 </style>

@@ -23,3 +23,6 @@ module.exports = (on, config) => {
     supportFile: "tests/e2e/support/index.js"
   });
 };
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require("@applitools/eyes.cypress")(module);
