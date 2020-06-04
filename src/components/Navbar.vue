@@ -1,15 +1,78 @@
+<!-- eslint-disable prettier/prettier -->
 <template>
-  <nav>
-    <div class="nav-wrapper">
-      <div class="container">
-        <a href="#" class="brand-logo">Vue Test App</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><router-link to="/">Home</router-link></li>
-          <li><router-link to="/emp">Employee</router-link></li>
-          <li><router-link to="/retired">Retired Employees</router-link></li>
-          <li><router-link to="/about">About</router-link></li>
-        </ul>
+  <div>
+    <nav>
+      <div class="nav-wrapper">
+        <div class="">
+          <a href="#" class="brand-logo">Vue Test App</a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"
+            ><i class="material-icons">menu</i></a
+          >
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <router-link tag="li" to="/"><a>Home</a></router-link>
+            <router-link tag="li" to="/admin"><a>Administration</a></router-link>
+            <router-link tag="li" to="/emp"><a>Employee</a></router-link>
+            <router-link tag="li" to="/retired"><a>Retired Employees</a></router-link>
+            <router-link tag="li" to="/about"><a>About</a></router-link>
+            <li v-if="authenticated" @click.prevent="logout" id="logout-btn">
+              <a class="waves-effect waves-light btn">Logout</a>
+            </li>
+            <li v-else @click.prevent="$auth.loginRedirect('/')" id="login-btn">
+              <a class="waves-effect waves-light btn">Login</a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+    <ul class="sidenav" id="mobile-demo">
+      <router-link tag="li" to="/"><a @click="closeSidenav">Home</a></router-link>
+      <router-link tag="li" to="/admin"><a @click="closeSidenav">Administration</a></router-link>
+      <router-link tag="li" to="/emp"><a @click="closeSidenav">Employee</a></router-link>
+      <router-link tag="li" to="/retired"><a @click="closeSidenav">Retired Employees</a></router-link>
+      <router-link tag="li" to="/about"><a @click="closeSidenav">About</a></router-link>
+      <li v-if="authenticated" @click.prevent="logout" id="logout-btn">
+        <a class="waves-effect waves-light btn">Logout</a>
+      </li>
+      <li v-else @click.prevent="$auth.loginRedirect('/')" id="login-btn">
+        <a class="waves-effect waves-light btn">Login</a>
+      </li>
+    </ul>
+  </div>
 </template>
+
+<script>
+import $ from "jquery";
+import M from "../../node_modules/materialize-css/dist/js/materialize.min.js";
+
+$(document).ready(function() {
+  M.Sidenav.init($(".sidenav"), []);
+});
+
+export default {
+  data() {
+    return {
+      authenticated: false
+    };
+  },
+  created() {
+    this.isAuthenticated();
+  },
+  watch: {
+    $route: "isAuthenticated"
+  },
+  methods: {
+    closeSidenav: function() {
+      M.Sidenav.getInstance($(".sidenav")).close();
+    },
+    isAuthenticated: async function() {
+      this.authenticated = await this.$auth.isAuthenticated();
+    },
+    logout: async function() {
+      await this.$auth.logout();
+      await this.isAuthenticated();
+
+      this.$router.push({ path: "/" });
+    }
+  }
+};
+</script>

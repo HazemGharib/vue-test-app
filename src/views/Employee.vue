@@ -1,6 +1,6 @@
 <template>
   <div class="row container">
-    <h1>Add new employee</h1>
+    <h3>Add new employee</h3>
     <form id="employee" class="col s12" action="#">
       <div class="row">
         <div class="input-field col s6">
