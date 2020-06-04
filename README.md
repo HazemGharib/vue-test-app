@@ -5,6 +5,14 @@
 yarn install
 ```
 
+## Environment setup
+
+Create `.env` or `.env.local` file with three values
+
+- `VUE_APP_ISS` : `https://****************.com/oauth2/default`
+- `VUE_APP_CLIENT_ID` : `****************`
+- `VUE_APP_REDIRECT_URI` : `http(s)://****************/implicit/callback`
+
 ### Compiles and hot-reloads for development
 ```
 yarn serve
