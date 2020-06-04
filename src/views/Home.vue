@@ -70,7 +70,6 @@ export default {
         const requestBody = res.data;
         this.employees = requestBody?.data;
         this.isLoaded = true;
-        console.log(this.employees);
       })
       .catch(err => console.error(err));
   }

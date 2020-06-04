@@ -6,7 +6,9 @@
     />
     <Navbar />
     <div id="main-content" class="container">
-      <router-view />
+      <transition name="slide" mode="out-in">
+        <router-view />
+      </transition>
     </div>
     <Footer />
   </div>
@@ -25,6 +27,15 @@ export default {
 </script>
 
 <style scoped>
+.slide-enter-active,
+.slide-leave-active {
+  transition: opacity 0.5s, transform 0.5s;
+}
+.slide-enter,
+.slide-leave-to {
+  opacity: 0;
+  transform: scale3d(0.5, 0.2, 0.5);
+}
 div#app {
   position: relative;
   min-height: 100vh;

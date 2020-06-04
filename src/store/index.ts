@@ -5,9 +5,24 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    Employees: []
+    workingList: [],
+    retiredList: []
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    addToRetiredList(state, payload) {
+      state.retiredList = payload;
+    },
+    addToWorkingList(state, payload) {
+      state.workingList = payload;
+    }
+  },
+  actions: {
+    setRetiredList(context, payload) {
+      context.commit("addToRetiredList", payload);
+    },
+    setWorkingList(context, payload) {
+      context.commit("addToWorkingList", payload);
+    }
+  },
   modules: {}
 });

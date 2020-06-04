@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from "vue-router";
 import Home from "@/views/Home.vue";
 import About from "@/views/About.vue";
 import Employee from "@/views/Employee.vue";
+import RetiredEmployees from "@/views/RetiredEmployees.vue";
 
 Vue.use(VueRouter);
 
@@ -23,6 +24,12 @@ const routes: Array<RouteConfig> = [
     path: "/employee",
     alias: ["/emp", "/new_employee"],
     component: Employee
+  },
+  {
+    name: "RetiredEmployees",
+    path: "/retired",
+    alias: "/retired_employees",
+    component: RetiredEmployees
   }
 ];
 
