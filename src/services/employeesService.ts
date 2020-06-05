@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Employee } from "../types/employee";
 
 const baseUrl = "http://dummy.restapiexample.com/api/v1";
 
@@ -7,12 +8,12 @@ export default class EmployeesService {
     return axios.get(`${baseUrl}/employees`);
   }
 
-  createEmployee(employee) {
+  createEmployee(employee: Employee) {
     if (!employee) throw { message: "No employee object provided" };
     return axios.post(`${baseUrl}/create`, {
       name: employee.name,
       salary: employee.salary,
-      age: employee.name
+      age: employee.age
     });
   }
 }

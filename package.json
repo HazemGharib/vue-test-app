@@ -5,12 +5,12 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test": "yarn test:unit && yarn test:e2e --headless",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
+    "prepare": "yarn run snyk-protect",
     "snyk-protect": "snyk protect",
-    "prepare": "yarn run snyk-protect"
+    "test": "yarn test:unit && yarn test:e2e --headless"
   },
   "dependencies": {
     "@okta/okta-vue": "^2.0.0",
@@ -36,7 +36,7 @@
     "@vue/cli-plugin-babel": "~4.3.0",
     "@vue/cli-plugin-e2e-cypress": "~4.3.0",
     "@vue/cli-plugin-eslint": "~4.3.0",
-    "@vue/cli-plugin-pwa": "~4.3.0",
+    "@vue/cli-plugin-pwa": "~4.4.0",
     "@vue/cli-plugin-router": "~4.3.0",
     "@vue/cli-plugin-typescript": "~4.3.0",
     "@vue/cli-plugin-unit-jest": "~4.3.0",
