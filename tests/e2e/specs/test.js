@@ -13,7 +13,7 @@ describe("My First Test", () => {
       cy.get("ul li").contains("Link 3");
       cy.get("ul li").contains("Link 4");
     });
-    cy.get(".card").should("have.length", 24);
+    cy.get(".card").should("have.length", 6);
     cy.visit("/home");
   });
 
