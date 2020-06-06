@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h4>{{ "Working List".toUpperCase() }}</h4>
+    <h4>{{ listName.toUpperCase() }}</h4>
     <p class="center help-text" v-if="multiple === 'true'">
       (Use ctrl or cmd to select multiple)
     </p>
@@ -11,8 +11,8 @@
           v-bind:class="{ 'fix-height': multiple === 'true' }"
           v-model="multipleSelections"
         >
-          <option v-for="employee in list" :value="employee" :key="employee.id">
-            {{ employee.employee_name }} - {{ employee.employee_age }}
+          <option v-for="user in list" :value="user" :key="user.id">
+            {{ user.first_name + " " + user.last_name }} - {{ user.email }}
           </option>
         </select>
       </div>
@@ -22,7 +22,9 @@
         @click="send"
         class="col offset-s3 s6 btn waves-effect waves-light"
       >
-        <i class="material-icons">navigate_next</i>
+        <i class="material-icons">{{
+          buttonDirection === "to-right" ? "navigate_next" : "navigate_before"
+        }}</i>
       </button>
     </div>
   </div>
@@ -30,7 +32,7 @@
 
 <script>
 export default {
-  props: ["list"],
+  props: ["buttonDirection", "list", "listName"],
   data: function() {
     return {
       multipleSelections: [],
@@ -39,15 +41,28 @@ export default {
   },
   methods: {
     send: function() {
-      this.$store.dispatch("setRetiredList", [
-        ...this.multipleSelections,
-        ...this.$store.state.retiredList
-      ]);
-      this.$store.dispatch("setWorkingList", [
-        ...this.$store.state.workingList.filter(
-          emp => !this.multipleSelections.includes(emp)
-        )
-      ]);
+      if (this.buttonDirection === "to-right") {
+        this.$store.dispatch("setRightList", [
+          ...this.multipleSelections,
+          ...this.$store.state.rightList
+        ]);
+        this.$store.dispatch("setLeftList", [
+          ...this.$store.state.leftList.filter(
+            emp => !this.multipleSelections.includes(emp)
+          )
+        ]);
+      } else {
+        this.$store.dispatch("setRightList", [
+          ...this.$store.state.rightList.filter(
+            emp => !this.multipleSelections.includes(emp)
+          )
+        ]);
+        this.$store.dispatch("setLeftList", [
+          ...this.multipleSelections,
+          ...this.$store.state.leftList
+        ]);
+      }
+      this.multipleSelections = [];
     }
   }
 };

@@ -5,23 +5,23 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    workingList: [],
-    retiredList: []
+    leftList: [],
+    rightList: []
   },
   mutations: {
-    addToRetiredList(state, payload) {
-      state.retiredList = payload;
+    addToLeftList(state, payload) {
+      state.leftList = payload;
     },
-    addToWorkingList(state, payload) {
-      state.workingList = payload;
+    addToRightList(state, payload) {
+      state.rightList = payload;
     }
   },
   actions: {
-    setRetiredList(context, payload) {
-      context.commit("addToRetiredList", payload);
+    setLeftList(context, payload) {
+      context.commit("addToLeftList", payload);
     },
-    setWorkingList(context, payload) {
-      context.commit("addToWorkingList", payload);
+    setRightList(context, payload) {
+      context.commit("addToRightList", payload);
     }
   },
   modules: {}

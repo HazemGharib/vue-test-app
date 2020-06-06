@@ -12,7 +12,7 @@
             <router-link tag="li" to="/"><a>Home</a></router-link>
             <router-link tag="li" to="/admin"><a>Administration</a></router-link>
             <router-link tag="li" to="/user"><a>Add New User</a></router-link>
-            <router-link tag="li" to="/retired"><a>Retired Employees</a></router-link>
+            <router-link tag="li" to="/move"><a>Move Users</a></router-link>
             <router-link tag="li" to="/about"><a>About</a></router-link>
             <li v-if="authenticated" @click.prevent="logout" id="logout-btn">
               <a class="waves-effect waves-light btn">Logout</a>
@@ -28,7 +28,7 @@
       <router-link tag="li" to="/"><a @click="closeSidenav">Home</a></router-link>
       <router-link tag="li" to="/admin"><a @click="closeSidenav">Administration</a></router-link>
       <router-link tag="li" to="/user"><a @click="closeSidenav">New User</a></router-link>
-      <router-link tag="li" to="/retired"><a @click="closeSidenav">Retired Employees</a></router-link>
+      <router-link tag="li" to="/move"><a @click="closeSidenav">Move Users</a></router-link>
       <router-link tag="li" to="/about"><a @click="closeSidenav">About</a></router-link>
       <li v-if="authenticated" @click.prevent="logout" id="logout-btn">
         <a class="waves-effect waves-light btn">Logout</a>

@@ -4,8 +4,8 @@ import { User, UserResponse } from "../types/user";
 const baseUrl = "https://reqres.in/api";
 
 export default class UsersService {
-  getAllUsers() {
-    return axios.get(`${baseUrl}/users`);
+  getAllUsers(page = undefined) {
+    return axios.get(`${baseUrl}/users${page ? `/?page=${page}` : ""}`);
   }
 
   createUser(user: User): Promise<UserResponse> {

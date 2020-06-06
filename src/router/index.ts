@@ -4,7 +4,7 @@ import Auth from "@okta/okta-vue";
 import Home from "@/views/Home.vue";
 import Administration from "@/views/Administration.vue";
 import NewUser from "@/views/NewUser.vue";
-import RetiredEmployees from "@/views/RetiredEmployees.vue";
+import MoveUsers from "@/views/MoveUsers.vue";
 import About from "@/views/About.vue";
 
 Vue.use(Auth, {
@@ -39,10 +39,10 @@ const routes: Array<RouteConfig> = [
     component: NewUser
   },
   {
-    name: "RetiredEmployees",
-    path: "/retired",
-    alias: "/retired_employees",
-    component: RetiredEmployees
+    name: "MoveUsers",
+    path: "/move",
+    alias: "/move_users",
+    component: MoveUsers
   },
   {
     name: "About",
