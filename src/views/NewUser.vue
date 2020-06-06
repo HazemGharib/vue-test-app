@@ -1,27 +1,21 @@
 <template>
   <div class="row container">
-    <h3>Add new employee</h3>
-    <form id="employee" class="col s12" action="#">
+    <h3>Add new user</h3>
+    <form id="user" class="col s12" action="#">
       <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s12">
           <i class="material-icons prefix">account_circle</i>
           <input id="name" v-model="name" type="text" class="validate" />
           <label for="name">Full Name</label>
         </div>
-        <div class="input-field col s6">
-          <i class="material-icons prefix">today</i>
-          <input id="age" v-model="age" type="text" class="validate" />
-          <label for="age">Age</label>
-        </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <i class="material-icons prefix">attach_money</i>
-          <input id="salary" v-model="salary" type="text" class="validate" />
-          <label for="salary">Salary</label>
+          <i class="material-icons prefix">work</i>
+          <input id="job" v-model="job" type="text" class="validate" />
+          <label for="job">Job</label>
         </div>
       </div>
-
       <div class="row">
         <button class="btn waves-effect waves-light" @click="submit">
           Submit
@@ -33,34 +27,32 @@
 </template>
 
 <script>
-import EmployeesService from "../services/employeesService";
+import UsersService from "../services/usersService";
 import router from "../router";
 
-const employeesService = new EmployeesService();
+const usersService = new UsersService();
 
 export default {
-  name: "Employee",
+  name: "User",
   data() {
     return {
       name: "",
-      age: "",
-      salary: ""
+      job: ""
     };
   },
   methods: {
     submit: function() {
-      const employee = {
+      const user = {
         name: this.name,
-        age: this.age,
-        salary: this.salary
+        job: this.job
       };
 
-      employeesService
-        .createEmployee(employee)
+      usersService
+        .createUser(user)
         .then(res => {
           const requestBody = res.data;
           console.log(requestBody);
-          router.push("/");
+          router.push(`/#${requestBody.id}`);
         })
         .catch(err => console.error(err));
     }

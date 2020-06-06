@@ -11,7 +11,7 @@
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <router-link tag="li" to="/"><a>Home</a></router-link>
             <router-link tag="li" to="/admin"><a>Administration</a></router-link>
-            <router-link tag="li" to="/emp"><a>Employee</a></router-link>
+            <router-link tag="li" to="/user"><a>Add New User</a></router-link>
             <router-link tag="li" to="/retired"><a>Retired Employees</a></router-link>
             <router-link tag="li" to="/about"><a>About</a></router-link>
             <li v-if="authenticated" @click.prevent="logout" id="logout-btn">
@@ -27,7 +27,7 @@
     <ul class="sidenav" id="mobile-demo">
       <router-link tag="li" to="/"><a @click="closeSidenav">Home</a></router-link>
       <router-link tag="li" to="/admin"><a @click="closeSidenav">Administration</a></router-link>
-      <router-link tag="li" to="/emp"><a @click="closeSidenav">Employee</a></router-link>
+      <router-link tag="li" to="/user"><a @click="closeSidenav">New User</a></router-link>
       <router-link tag="li" to="/retired"><a @click="closeSidenav">Retired Employees</a></router-link>
       <router-link tag="li" to="/about"><a @click="closeSidenav">About</a></router-link>
       <li v-if="authenticated" @click.prevent="logout" id="logout-btn">

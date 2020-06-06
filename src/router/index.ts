@@ -3,7 +3,7 @@ import VueRouter, { RouteConfig } from "vue-router";
 import Auth from "@okta/okta-vue";
 import Home from "@/views/Home.vue";
 import Administration from "@/views/Administration.vue";
-import Employee from "@/views/Employee.vue";
+import NewUser from "@/views/NewUser.vue";
 import RetiredEmployees from "@/views/RetiredEmployees.vue";
 import About from "@/views/About.vue";
 
@@ -33,10 +33,10 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    name: "Employee",
-    path: "/employee",
-    alias: ["/emp", "/new_employee"],
-    component: Employee
+    name: "User",
+    path: "/user",
+    alias: "/new_user",
+    component: NewUser
   },
   {
     name: "RetiredEmployees",

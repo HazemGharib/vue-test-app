@@ -14,34 +14,28 @@
       </div>
     </div>
     <div v-else class="row">
-      <div class="col card" v-for="employee in employees" :key="employee.id">
+      <div class="col card" v-for="user in users" :key="user.id">
         <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator" src="../assets/nature.jpeg" />
+          <img class="activator" :src="user.avatar" />
         </div>
         <div class="card-content">
           <span class="card-title activator grey-text text-darken-4">
-            {{ employee.employee_name }}
+            {{ user.first_name + " " + user.last_name }}
             <i class="material-icons right">more_vert</i>
           </span>
-          <p>{{ employee.employee_age }} years old</p>
+          <p>ID# {{ user.id }}</p>
         </div>
         <div class="card-reveal">
           <span class="card-title grey-text text-darken-4">
-            {{ employee.employee_name }}
+            {{ user.first_name + " " + user.last_name }}
             <i class="material-icons right">close</i>
           </span>
+          <p>Email: {{ user.email }}</p>
           <p>
-            {{ employee.employee_name }} earns L.E.
-            {{ employee.employee_salary }}
-            anually.
-          </p>
-          <p>
-            Which is L.E. {{ Math.floor(employee.employee_salary / 12) }}
-            monthly.
-          </p>
-          <p>
-            That's L.E. {{ Math.floor(employee.employee_salary / 12 / 4) }}
-            weekly.
+            Avatar:
+            <a :href="user.avatar">{{
+              user.first_name + " " + user.last_name
+            }}</a>
           </p>
         </div>
       </div>
@@ -50,25 +44,25 @@
 </template>
 
 <script>
-import EmployeesService from "../services/employeesService";
+import UsersService from "../services/usersService";
 
-const employeesService = new EmployeesService();
+const usersService = new UsersService();
 
 export default {
   name: "Home",
   data() {
     return {
-      employees: [],
+      users: [],
       isLoaded: false
     };
   },
   created() {
-    if (this.employees.length != 0) return;
-    employeesService
-      .getAllEmployees()
+    if (this.users.length != 0) return;
+    usersService
+      .getAllUsers()
       .then(res => {
         const requestBody = res.data;
-        this.employees = requestBody?.data;
+        this.users = requestBody?.data;
         this.isLoaded = true;
       })
       .catch(err => console.error(err));
@@ -77,6 +71,10 @@ export default {
 </script>
 
 <style scoped>
+p {
+  overflow-wrap: break-word;
+}
+
 .card {
   margin: 10px;
   width: 30%;
