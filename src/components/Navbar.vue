@@ -5,7 +5,7 @@
       <div class="nav-wrapper">
         <div class="">
           <a href="#" class="brand-logo">Vue Test App</a>
-          <a href="#" data-target="mobile-demo" class="sidenav-trigger"
+          <a href="#" data-target="mobile-sidenav" class="sidenav-trigger"
             ><i class="material-icons">menu</i></a
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -24,7 +24,7 @@
         </div>
       </div>
     </nav>
-    <ul class="sidenav" id="mobile-demo">
+    <ul class="sidenav" id="mobile-sidenav">
       <router-link tag="li" to="/"><a @click="closeSidenav">Home</a></router-link>
       <router-link tag="li" to="/admin"><a @click="closeSidenav">Administration</a></router-link>
       <router-link tag="li" to="/user"><a @click="closeSidenav">New User</a></router-link>

@@ -40,32 +40,93 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col s4 offset-s5">
+        <ul class="pagination">
+          <li
+            data-position="left"
+            data-tooltip="First"
+            :class="
+              (currentPage == 1 ? 'disabled' : 'waves-effect') + ' tooltipped'
+            "
+          >
+            <a @click="currentPage != 1 ? navigate(1, true) : null"
+              ><i class="material-icons">chevron_left</i></a
+            >
+          </li>
+          <li
+            :class="currentPage == i ? 'active' : 'waves-effect'"
+            :key="i"
+            v-for="i in totalPages"
+          >
+            <a @click="currentPage != i ? navigate(i, true) : null">{{ i }}</a>
+          </li>
+          <li
+            data-position="right"
+            data-tooltip="Last"
+            :class="
+              (currentPage == totalPages ? 'disabled' : 'waves-effect') +
+                ' tooltipped'
+            "
+          >
+            <a
+              @click="
+                currentPage != totalPages ? navigate(totalPages, true) : null
+              "
+              ><i class="material-icons">chevron_right</i></a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import $ from "jquery";
+import M from "../../node_modules/materialize-css/dist/js/materialize.min.js";
+
 import UsersService from "../services/usersService";
+import router from "../router";
 
 const usersService = new UsersService();
+
+$(document).ready(function() {
+  M.Tooltip.init($(".tooltipped"), []);
+});
 
 export default {
   name: "Home",
   data() {
     return {
       users: [],
+      currentPage: 0,
+      totalPages: 0,
+      router,
       isLoaded: false
     };
   },
   created() {
+    console.log(this.$route.query.page);
     if (this.users.length != 0) return;
-    usersService
-      .getAllUsers()
-      .then(res => {
-        const requestBody = res.data;
-        this.users = requestBody?.data;
-        this.isLoaded = true;
-      })
-      .catch(err => console.error(err));
+    this.navigate(this.$route.query.page || 1);
+  },
+  methods: {
+    navigate: function(page, pushRoute = false) {
+      usersService
+        .getAllUsers(page)
+        .then(res => {
+          const requestBody = res.data;
+          this.currentPage = requestBody?.page;
+          this.totalPages = requestBody?.total_pages;
+          this.users = requestBody?.data;
+          this.isLoaded = true;
+        })
+        .then(() => {
+          if (pushRoute) router.push(`/?page=${page}`);
+        })
+        .catch(err => console.error(err));
+    }
   }
 };
 </script>
