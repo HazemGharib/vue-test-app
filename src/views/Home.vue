@@ -14,29 +14,47 @@
       </div>
     </div>
     <div v-else class="row">
-      <div class="col card" v-for="user in users" :key="user.id">
-        <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator" :src="user.avatar" />
+      <div class="col s7">
+        <div class="col card" v-for="user in users" :key="user.id">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" :src="user.avatar" />
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">
+              {{ user.first_name + " " + user.last_name }}
+              <i class="material-icons right">more_vert</i>
+            </span>
+            <p>ID# {{ user.id }}</p>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">
+              {{ user.first_name + " " + user.last_name }}
+              <i class="material-icons right">close</i>
+            </span>
+            <p>Email: {{ user.email }}</p>
+            <p>
+              Avatar:
+              <a :href="user.avatar">{{
+                user.first_name + " " + user.last_name
+              }}</a>
+            </p>
+            <p>
+              <input
+                class="waves-effect waves-light btn"
+                @click="checkout(596225)"
+                type="button"
+                value="Hire now!"
+              />
+            </p>
+          </div>
         </div>
-        <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4">
-            {{ user.first_name + " " + user.last_name }}
-            <i class="material-icons right">more_vert</i>
-          </span>
-          <p>ID# {{ user.id }}</p>
+      </div>
+      <div class="col s5">
+        <div class="checkout-container">
+          <h4 v-if="isEmptyCheckout">Nothing to checkout</h4>
         </div>
-        <div class="card-reveal">
-          <span class="card-title grey-text text-darken-4">
-            {{ user.first_name + " " + user.last_name }}
-            <i class="material-icons right">close</i>
-          </span>
-          <p>Email: {{ user.email }}</p>
-          <p>
-            Avatar:
-            <a :href="user.avatar">{{
-              user.first_name + " " + user.last_name
-            }}</a>
-          </p>
+        <div class="overlay-button">
+          <a href="#!" class="paddle_button" data-product="596225">Buy Now!</a>
         </div>
       </div>
     </div>
@@ -103,16 +121,17 @@ export default {
       currentPage: 0,
       totalPages: 0,
       router,
-      isLoaded: false
+      isLoaded: false,
+      isEmptyCheckout: true
     };
   },
   created() {
-    console.log(this.$route.query.page);
     if (this.users.length != 0) return;
     this.navigate(this.$route.query.page || 1);
   },
   methods: {
     navigate: function(page, pushRoute = false) {
+      usersService.getAllProducts().then(results => console.log(results.data));
       usersService
         .getAllUsers(page)
         .then(res => {
@@ -125,7 +144,21 @@ export default {
         .then(() => {
           if (pushRoute) router.push(`/?page=${page}`);
         })
+        .then(() => window.Paddle.Setup({ vendor: 115775 }))
         .catch(err => console.error(err));
+    },
+    checkout: function(product) {
+      this.isEmptyCheckout = false;
+      window.Paddle.Checkout.open({
+        method: "inline",
+        product: product,
+        allowQuantity: false,
+        disableLogout: true,
+        frameTarget: "checkout-container",
+        frameInitialHeight: 416,
+        frameStyle:
+          "width:495px; min-width:495px; background-color: transparent; border: none;"
+      });
     }
   }
 };
@@ -137,8 +170,24 @@ p {
 }
 
 .card {
-  margin: 10px;
-  width: 30%;
+  margin: 2rem 2rem;
+  width: 20rem;
+  height: 28rem;
+}
+
+.overlay-button {
+  margin-top: 10%;
+}
+
+.checkout-container {
+  border: 1px black solid;
+  height: fit-content;
+  margin-top: 3rem;
+}
+
+.checkout-container h4 {
+  width: 320px;
+  margin: 1rem auto;
 }
 
 .preloader-wrapper {

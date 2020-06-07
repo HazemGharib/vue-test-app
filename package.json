@@ -61,7 +61,6 @@
   "lint-staged": {
     "*.{js,jsx,vue,ts,tsx}": [
       "vue-cli-service lint",
-      "yarn test",
       "git add"
     ]
   },
