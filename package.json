@@ -22,7 +22,7 @@
     "register-service-worker": "^1.7.1",
     "snyk": "^1.337.0",
     "vue": "^2.6.11",
-    "vue-class-component": "^7.2.3",
+    "vue-class-component": "^7.2.4",
     "vue-property-decorator": "^8.5.0",
     "vue-router": "^3.3.1",
     "vuex": "^3.1.3"
