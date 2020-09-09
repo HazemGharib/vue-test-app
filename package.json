@@ -13,7 +13,7 @@
     "test": "yarn test:unit && yarn test:e2e --headless"
   },
   "dependencies": {
-    "@okta/okta-vue": "^2.0.0",
+    "@okta/okta-vue": "^2.1.0",
     "@types/okta__okta-vue": "^1.2.0",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
